@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { API } from '@/lib/api';
 
 interface StaffMember {
     id: string;
@@ -17,7 +18,7 @@ const StaffManager = () => {
     useEffect(() => {
         const fetchStaff = async () => {
             try {
-                const res = await fetch('http://localhost:8000/api/v1/xs/staff');
+                const res = await fetch(`${API.xs}/staff`);
                 const data = await res.json();
                 setStaff(data);
             } catch (error) {

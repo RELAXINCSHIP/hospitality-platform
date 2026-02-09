@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { API } from '@/lib/api';
 
 interface BottleItem {
     id: string;
@@ -18,7 +19,7 @@ const BottleMenu = () => {
     useEffect(() => {
         const fetchMenu = async () => {
             try {
-                const res = await fetch('http://localhost:8000/api/v1/xs/menu');
+                const res = await fetch(`${API.xs}/menu`);
                 const data = await res.json();
                 setMenu(data);
             } catch (error) {

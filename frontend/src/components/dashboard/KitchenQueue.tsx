@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { API } from "@/lib/api";
 import { Badge } from "lucide-react"; // Wait, Badge is usually a component, let's use a simple span for now or check if we have Badge
 import { Clock, Flame, CheckCircle, ChefHat } from "lucide-react";
 import { format } from 'date-fns';
@@ -27,7 +28,7 @@ export function KitchenQueue() {
     useEffect(() => {
         const fetchQueue = async () => {
             try {
-                const res = await fetch('http://localhost:8000/api/v1/integrations/kitchen/queue');
+                const res = await fetch(`${API.integrations}/kitchen/queue`);
                 if (res.ok) {
                     const data = await res.json();
                     setQueue(data);

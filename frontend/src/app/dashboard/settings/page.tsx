@@ -15,10 +15,21 @@ import {
     Globe,
     CreditCard,
     Printer,
-    ChevronRight
+    ChevronRight,
+    BrainCircuit
 } from "lucide-react";
+import { useRestaurant } from "@/context/RestaurantContext";
 
 const SETTINGS_SECTIONS = [
+    {
+        title: "Agents & Simulation",
+        icon: BrainCircuit,
+        items: [
+            { name: "Simulation Status", description: "Monitor backend simulation health", href: "#", status: "Active" },
+            { name: "Agent Behavior", description: "Adjust guest personality traits", href: "#" },
+            { name: "Traffic Flow", description: "Control guest arrival rates", href: "#" },
+        ]
+    },
     {
         title: "Restaurant",
         icon: Building2,
@@ -76,7 +87,11 @@ const SETTINGS_SECTIONS = [
     },
 ];
 
+
+
 export default function SettingsPage() {
+    const { systemRunning, startSystem, stopSystem } = useRestaurant();
+
     return (
         <div className="flex min-h-screen bg-void">
             <Sidebar />
@@ -102,26 +117,62 @@ export default function SettingsPage() {
                             </CardHeader>
                             <CardContent className="p-0">
                                 <div className="divide-y divide-white/5">
-                                    {section.items.map((item) => (
-                                        <a
-                                            key={item.name}
-                                            href={item.href}
-                                            className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors group"
-                                        >
-                                            <div>
-                                                <div className="flex items-center gap-2">
-                                                    <p className="font-medium text-white">{item.name}</p>
-                                                    {'connected' in item && (
-                                                        <Badge variant={item.connected ? "returning" : "station"}>
-                                                            {item.connected ? "Connected" : "Not Connected"}
-                                                        </Badge>
-                                                    )}
+                                    {section.items.map((item) => {
+                                        // Custom rendering for Simulation Status
+                                        if (item.name === "Simulation Status") {
+                                            return (
+                                                <div key={item.name} className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors">
+                                                    <div>
+                                                        <div className="flex items-center gap-2">
+                                                            <p className="font-medium text-white">{item.name}</p>
+                                                            <Badge variant={systemRunning ? "returning" : "destructive"}>
+                                                                {systemRunning ? "SYSTEM ACTIVE" : "SYSTEM STOPPED"}
+                                                            </Badge>
+                                                        </div>
+                                                        <p className="text-sm text-muted-foreground">{item.description}</p>
+                                                        {!systemRunning && (
+                                                            <p className="text-xs text-gold mt-1">
+                                                                ⚠️ Simulation scripts require System Active
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                    <Button
+                                                        size="sm"
+                                                        className={systemRunning ? "bg-red-500/20 text-red-500 hover:bg-red-500/30" : "bg-emerald-500/20 text-emerald-500 hover:bg-emerald-500/30"}
+                                                        onClick={() => systemRunning ? stopSystem() : startSystem()}
+                                                    >
+                                                        {systemRunning ? "Stop Service" : "START SERVICE"}
+                                                    </Button>
                                                 </div>
-                                                <p className="text-sm text-muted-foreground">{item.description}</p>
-                                            </div>
-                                            <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-gold transition-colors" />
-                                        </a>
-                                    ))}
+                                            );
+                                        }
+
+                                        return (
+                                            <a
+                                                key={item.name}
+                                                href={item.href}
+                                                className="flex items-center justify-between p-4 hover:bg-white/5 transition-colors group"
+                                            >
+                                                <div>
+                                                    <div className="flex items-center gap-2">
+                                                        <p className="font-medium text-white">{item.name}</p>
+                                                        {'connected' in item && (
+                                                            <Badge variant={item.connected ? "returning" : "station"}>
+                                                                {item.connected ? "Connected" : "Not Connected"}
+                                                            </Badge>
+                                                        )}
+                                                        {'status' in item && (
+                                                            <Badge variant="vip" className="bg-emerald-500/20 text-emerald-500 border-emerald-500/50">
+                                                                {item.status}
+                                                            </Badge>
+                                                        )}
+                                                    </div>
+                                                    <p className="text-sm text-muted-foreground">{item.description}</p>
+                                                </div>
+                                                <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-gold transition-colors" />
+                                            </a>
+                                        );
+                                    })}
                                 </div>
                             </CardContent>
                         </Card>

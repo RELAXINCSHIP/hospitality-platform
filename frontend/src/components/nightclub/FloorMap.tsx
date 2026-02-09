@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { API } from '@/lib/api';
 
 interface Table {
     id: string;
@@ -22,7 +23,7 @@ const FloorMap = () => {
     useEffect(() => {
         const fetchLayout = async () => {
             try {
-                const res = await fetch('http://localhost:8000/api/v1/xs/layout');
+                const res = await fetch(`${API.xs}/layout`);
                 const data = await res.json();
                 // Sort to put Stage/Dance Floor first for visual hierarchy
                 const sorted = data.sort((a: Section, b: Section) => b.min_spend - a.min_spend);

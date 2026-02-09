@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import { API } from '@/lib/api';
 
 // Types
 export interface OrderItem {
@@ -145,7 +146,7 @@ export function RestaurantProvider({ children }: { children: ReactNode }) {
     const [notifications, setNotifications] = useState<string[]>([]);
 
     // Backend API URL
-    const API_URL = 'http://localhost:8000/api/v1/integrations';
+    const API_URL = API.integrations;
     const [recentlyDelivered, setRecentlyDelivered] = useState<Set<string>>(new Set());
 
     const addNotification = useCallback((message: string) => {
