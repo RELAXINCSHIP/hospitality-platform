@@ -22,8 +22,14 @@ import requests
 from datetime import datetime
 import sys
 
+import os
+
 # ================= CONFIGURATION =================
-API_BASE = "http://127.0.0.1:8000/api/v1/integrations"
+# Use remote URL if set, otherwise localhost
+API_BASE_URL = os.getenv("REMOTE_API_URL", "http://127.0.0.1:8000")
+API_BASE = f"{API_BASE_URL}/api/v1/integrations"
+
+print(f"{Colors.CYAN}Targeting Backend: {API_BASE_URL}{Colors.END}")
 
 # Timing (in seconds)
 TICK_INTERVAL = 2.0          # How often the sim loop runs
