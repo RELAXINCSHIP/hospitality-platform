@@ -17,7 +17,9 @@ Base.metadata.create_all(bind=engine)
 
 # CORS Configuration
 origins = [
-    "http://localhost:3000",  # Next.js Frontend
+    "http://localhost:3000",  # Next.js Frontend (local)
+    "https://hospitality-platform.vercel.app",  # Vercel Frontend
+    "*",  # Allow all for development
 ]
 
 app.add_middleware(
