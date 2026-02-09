@@ -57,13 +57,16 @@ export default function Home() {
                     </p>
 
                     <div className="flex flex-wrap items-center justify-center gap-4">
-                        <Link href="/host" className="px-8 py-4 bg-gold hover:bg-gold/90 text-black font-bold rounded-xl transition-all transform hover:scale-105 flex items-center gap-2">
-                            Launch Dashboard
+                        <Link href="/dashboard" className="px-8 py-4 bg-gold hover:bg-gold/90 text-black font-bold rounded-xl transition-all transform hover:scale-105 flex items-center gap-2">
+                            Management Overview
                             <ArrowRight className="h-5 w-5" />
                         </Link>
-                        <Link href="/xs" className="px-8 py-4 border border-white/20 hover:border-gold/50 text-white font-bold rounded-xl transition-all hover:bg-white/5 flex items-center gap-2">
+                        <Link href="/host" className="px-8 py-4 border border-white/20 hover:border-gold/50 text-white font-bold rounded-xl transition-all hover:bg-white/5 flex items-center gap-2">
+                            Host Stand
+                        </Link>
+                        <Link href="/xs" className="px-8 py-4 border border-purple-500/30 hover:border-purple-500/50 text-white font-bold rounded-xl transition-all hover:bg-purple-500/10 flex items-center gap-2">
                             <Music className="h-5 w-5 text-purple-400" />
-                            XS Nightclub Mode
+                            XS Nightclub
                         </Link>
                     </div>
                 </motion.div>
