@@ -1,8 +1,17 @@
 "use client";
 
+import { Suspense } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { FloorPlanView } from "@/components/dashboard/FloorPlanView";
+
+function FloorPlanLoader() {
+    return (
+        <div className="h-[600px] bg-charcoal/50 rounded-xl flex items-center justify-center">
+            <div className="animate-pulse text-muted-foreground">Loading floor plan...</div>
+        </div>
+    );
+}
 
 export default function FloorPage() {
     return (
@@ -24,7 +33,9 @@ export default function FloorPage() {
                         <CardTitle>Main Dining Room</CardTitle>
                     </CardHeader>
                     <CardContent className="pt-4">
-                        <FloorPlanView />
+                        <Suspense fallback={<FloorPlanLoader />}>
+                            <FloorPlanView />
+                        </Suspense>
                     </CardContent>
                 </Card>
             </main>
