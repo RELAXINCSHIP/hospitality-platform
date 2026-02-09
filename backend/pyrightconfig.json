@@ -1,0 +1,23 @@
+{
+    "include": [
+        "app"
+    ],
+    "exclude": [
+        "**/__pycache__",
+        "**/.venv"
+    ],
+    "venvPath": "C:\\Users\\kenny\\.gemini\\antigravity\\scratch\\hospitality-platform\\backend",
+    "venv": ".venv",
+    "pythonVersion": "3.11",
+    "typeCheckingMode": "basic",
+    "reportMissingImports": "error",
+    "reportMissingTypeStubs": false,
+    "executionEnvironments": [
+        {
+            "root": "app",
+            "extraPaths": [
+                "."
+            ]
+        }
+    ]
+}

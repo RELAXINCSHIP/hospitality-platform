@@ -1,0 +1,466 @@
+﻿{
+    "openapi":  "3.1.0",
+    "info":  {
+                 "title":  "HOSPITALITY AI OS",
+                 "description":  "Enterprise AI Operating System for Premium Hospitality",
+                 "version":  "0.1.0"
+             },
+    "paths":  {
+                  "/":  {
+                            "get":  {
+                                        "summary":  "Read Root",
+                                        "operationId":  "read_root__get",
+                                        "responses":  {
+                                                          "200":  {
+                                                                      "description":  "Successful Response",
+                                                                      "content":  {
+                                                                                      "application/json":  {
+                                                                                                               "schema":  {
+
+                                                                                                                          }
+                                                                                                           }
+                                                                                  }
+                                                                  }
+                                                      }
+                                    }
+                        },
+                  "/health":  {
+                                  "get":  {
+                                              "summary":  "Health Check",
+                                              "operationId":  "health_check_health_get",
+                                              "responses":  {
+                                                                "200":  {
+                                                                            "description":  "Successful Response",
+                                                                            "content":  {
+                                                                                            "application/json":  {
+                                                                                                                     "schema":  {
+
+                                                                                                                                }
+                                                                                                                 }
+                                                                                        }
+                                                                        }
+                                                            }
+                                          }
+                              },
+                  "/api/v1/integrations/webhook/toast":  {
+                                                             "post":  {
+                                                                          "tags":  [
+                                                                                       "integrations"
+                                                                                   ],
+                                                                          "summary":  "Receive Toast Order",
+                                                                          "description":  "Webhook endpoint to receive orders from Toast POS.\nNormalization happens here.",
+                                                                          "operationId":  "receive_toast_order_api_v1_integrations_webhook_toast_post",
+                                                                          "requestBody":  {
+                                                                                              "content":  {
+                                                                                                              "application/json":  {
+                                                                                                                                       "schema":  {
+                                                                                                                                                      "$ref":  "#/components/schemas/Order"
+                                                                                                                                                  }
+                                                                                                                                   }
+                                                                                                          },
+                                                                                              "required":  true
+                                                                                          },
+                                                                          "responses":  {
+                                                                                            "200":  {
+                                                                                                        "description":  "Successful Response",
+                                                                                                        "content":  {
+                                                                                                                        "application/json":  {
+                                                                                                                                                 "schema":  {
+                                                                                                                                                                "$ref":  "#/components/schemas/Order"
+                                                                                                                                                            }
+                                                                                                                                             }
+                                                                                                                    }
+                                                                                                    },
+                                                                                            "422":  {
+                                                                                                        "description":  "Validation Error",
+                                                                                                        "content":  {
+                                                                                                                        "application/json":  {
+                                                                                                                                                 "schema":  {
+                                                                                                                                                                "$ref":  "#/components/schemas/HTTPValidationError"
+                                                                                                                                                            }
+                                                                                                                                             }
+                                                                                                                    }
+                                                                                                    }
+                                                                                        }
+                                                                      }
+                                                         },
+                  "/api/v1/integrations/orders":  {
+                                                      "get":  {
+                                                                  "tags":  [
+                                                                               "integrations"
+                                                                           ],
+                                                                  "summary":  "Get Recent Orders",
+                                                                  "description":  "Get all active orders (for Kitchen Display or Manager Dash).\nFetches fresh data from Toast.",
+                                                                  "operationId":  "get_recent_orders_api_v1_integrations_orders_get",
+                                                                  "responses":  {
+                                                                                    "200":  {
+                                                                                                "description":  "Successful Response",
+                                                                                                "content":  {
+                                                                                                                "application/json":  {
+                                                                                                                                         "schema":  {
+                                                                                                                                                        "items":  {
+                                                                                                                                                                      "$ref":  "#/components/schemas/Order"
+                                                                                                                                                                  },
+                                                                                                                                                        "type":  "array",
+                                                                                                                                                        "title":  "Response Get Recent Orders Api V1 Integrations Orders Get"
+                                                                                                                                                    }
+                                                                                                                                     }
+                                                                                                            }
+                                                                                            }
+                                                                                }
+                                                              }
+                                                  },
+                  "/api/v1/integrations/insights":  {
+                                                        "get":  {
+                                                                    "tags":  [
+                                                                                 "integrations"
+                                                                             ],
+                                                                    "summary":  "Get Dashboard Insights",
+                                                                    "description":  "Get AI-generated insights for the dashboard.",
+                                                                    "operationId":  "get_dashboard_insights_api_v1_integrations_insights_get",
+                                                                    "responses":  {
+                                                                                      "200":  {
+                                                                                                  "description":  "Successful Response",
+                                                                                                  "content":  {
+                                                                                                                  "application/json":  {
+                                                                                                                                           "schema":  {
+
+                                                                                                                                                      }
+                                                                                                                                       }
+                                                                                                              }
+                                                                                              }
+                                                                                  }
+                                                                }
+                                                    },
+                  "/api/v1/integrations/guests/{guest_id}":  {
+                                                                 "get":  {
+                                                                             "tags":  [
+                                                                                          "integrations"
+                                                                                      ],
+                                                                             "summary":  "Get Guest Profile",
+                                                                             "description":  "Retrieve unified guest profile.",
+                                                                             "operationId":  "get_guest_profile_api_v1_integrations_guests__guest_id__get",
+                                                                             "parameters":  [
+                                                                                                {
+                                                                                                    "name":  "guest_id",
+                                                                                                    "in":  "path",
+                                                                                                    "required":  true,
+                                                                                                    "schema":  {
+                                                                                                                   "type":  "string",
+                                                                                                                   "title":  "Guest Id"
+                                                                                                               }
+                                                                                                }
+                                                                                            ],
+                                                                             "responses":  {
+                                                                                               "200":  {
+                                                                                                           "description":  "Successful Response",
+                                                                                                           "content":  {
+                                                                                                                           "application/json":  {
+                                                                                                                                                    "schema":  {
+                                                                                                                                                                   "$ref":  "#/components/schemas/GuestProfile"
+                                                                                                                                                               }
+                                                                                                                                                }
+                                                                                                                       }
+                                                                                                       },
+                                                                                               "422":  {
+                                                                                                           "description":  "Validation Error",
+                                                                                                           "content":  {
+                                                                                                                           "application/json":  {
+                                                                                                                                                    "schema":  {
+                                                                                                                                                                   "$ref":  "#/components/schemas/HTTPValidationError"
+                                                                                                                                                               }
+                                                                                                                                                }
+                                                                                                                       }
+                                                                                                       }
+                                                                                           }
+                                                                         }
+                                                             },
+                  "/api/v1/integrations/kitchen/queue":  {
+                                                             "get":  {
+                                                                         "tags":  [
+                                                                                      "integrations"
+                                                                                  ],
+                                                                         "summary":  "Get Kitchen Queue",
+                                                                         "description":  "Get the optimized kitchen queue (KDS View).\nReturns orders with \u0027fire_at\u0027 times and station assignments.",
+                                                                         "operationId":  "get_kitchen_queue_api_v1_integrations_kitchen_queue_get",
+                                                                         "responses":  {
+                                                                                           "200":  {
+                                                                                                       "description":  "Successful Response",
+                                                                                                       "content":  {
+                                                                                                                       "application/json":  {
+                                                                                                                                                "schema":  {
+
+                                                                                                                                                           }
+                                                                                                                                            }
+                                                                                                                   }
+                                                                                                   }
+                                                                                       }
+                                                                     }
+                                                         },
+                  "/api/v1/integrations/kitchen/bump/{item_id}":  {
+                                                                      "post":  {
+                                                                                   "tags":  [
+                                                                                                "integrations"
+                                                                                            ],
+                                                                                   "summary":  "Bump Item",
+                                                                                   "description":  "Mark an item as complete (Bump).",
+                                                                                   "operationId":  "bump_item_api_v1_integrations_kitchen_bump__item_id__post",
+                                                                                   "parameters":  [
+                                                                                                      {
+                                                                                                          "name":  "item_id",
+                                                                                                          "in":  "path",
+                                                                                                          "required":  true,
+                                                                                                          "schema":  {
+                                                                                                                         "type":  "string",
+                                                                                                                         "title":  "Item Id"
+                                                                                                                     }
+                                                                                                      }
+                                                                                                  ],
+                                                                                   "responses":  {
+                                                                                                     "200":  {
+                                                                                                                 "description":  "Successful Response",
+                                                                                                                 "content":  {
+                                                                                                                                 "application/json":  {
+                                                                                                                                                          "schema":  {
+
+                                                                                                                                                                     }
+                                                                                                                                                      }
+                                                                                                                             }
+                                                                                                             },
+                                                                                                     "422":  {
+                                                                                                                 "description":  "Validation Error",
+                                                                                                                 "content":  {
+                                                                                                                                 "application/json":  {
+                                                                                                                                                          "schema":  {
+                                                                                                                                                                         "$ref":  "#/components/schemas/HTTPValidationError"
+                                                                                                                                                                     }
+                                                                                                                                                      }
+                                                                                                                             }
+                                                                                                             }
+                                                                                                 }
+                                                                               }
+                                                                  }
+              },
+    "components":  {
+                       "schemas":  {
+                                       "GuestProfile":  {
+                                                            "properties":  {
+                                                                               "id":  {
+                                                                                          "type":  "string",
+                                                                                          "format":  "uuid",
+                                                                                          "title":  "Id"
+                                                                                      },
+                                                                               "name":  {
+                                                                                            "type":  "string",
+                                                                                            "title":  "Name"
+                                                                                        },
+                                                                               "email":  {
+                                                                                             "anyOf":  [
+                                                                                                           {
+                                                                                                               "type":  "string",
+                                                                                                               "format":  "email"
+                                                                                                           },
+                                                                                                           {
+                                                                                                               "type":  "null"
+                                                                                                           }
+                                                                                                       ],
+                                                                                             "title":  "Email"
+                                                                                         },
+                                                                               "phone":  {
+                                                                                             "anyOf":  [
+                                                                                                           {
+                                                                                                               "type":  "string"
+                                                                                                           },
+                                                                                                           {
+                                                                                                               "type":  "null"
+                                                                                                           }
+                                                                                                       ],
+                                                                                             "title":  "Phone"
+                                                                                         },
+                                                                               "vip_status":  {
+                                                                                                  "type":  "boolean",
+                                                                                                  "title":  "Vip Status",
+                                                                                                  "default":  false
+                                                                                              },
+                                                                               "dietary_restrictions":  {
+                                                                                                            "items":  {
+                                                                                                                          "type":  "string"
+                                                                                                                      },
+                                                                                                            "type":  "array",
+                                                                                                            "title":  "Dietary Restrictions",
+                                                                                                            "default":  [
+
+                                                                                                                        ]
+                                                                                                        },
+                                                                               "lifetime_spend":  {
+                                                                                                      "type":  "number",
+                                                                                                      "title":  "Lifetime Spend",
+                                                                                                      "default":  0.0
+                                                                                                  },
+                                                                               "preferences":  {
+                                                                                                   "additionalProperties":  true,
+                                                                                                   "type":  "object",
+                                                                                                   "title":  "Preferences",
+                                                                                                   "default":  {
+
+                                                                                                               }
+                                                                                               }
+                                                                           },
+                                                            "type":  "object",
+                                                            "required":  [
+                                                                             "name"
+                                                                         ],
+                                                            "title":  "GuestProfile"
+                                                        },
+                                       "HTTPValidationError":  {
+                                                                   "properties":  {
+                                                                                      "detail":  {
+                                                                                                     "items":  {
+                                                                                                                   "$ref":  "#/components/schemas/ValidationError"
+                                                                                                               },
+                                                                                                     "type":  "array",
+                                                                                                     "title":  "Detail"
+                                                                                                 }
+                                                                                  },
+                                                                   "type":  "object",
+                                                                   "title":  "HTTPValidationError"
+                                                               },
+                                       "Order":  {
+                                                     "properties":  {
+                                                                        "id":  {
+                                                                                   "type":  "string",
+                                                                                   "title":  "Id"
+                                                                               },
+                                                                        "source":  {
+                                                                                       "type":  "string",
+                                                                                       "title":  "Source",
+                                                                                       "default":  "toast"
+                                                                                   },
+                                                                        "table_number":  {
+                                                                                             "anyOf":  [
+                                                                                                           {
+                                                                                                               "type":  "integer"
+                                                                                                           },
+                                                                                                           {
+                                                                                                               "type":  "null"
+                                                                                                           }
+                                                                                                       ],
+                                                                                             "title":  "Table Number"
+                                                                                         },
+                                                                        "guest_count":  {
+                                                                                            "type":  "integer",
+                                                                                            "title":  "Guest Count",
+                                                                                            "default":  1
+                                                                                        },
+                                                                        "items":  {
+                                                                                      "items":  {
+                                                                                                    "$ref":  "#/components/schemas/OrderItem"
+                                                                                                },
+                                                                                      "type":  "array",
+                                                                                      "title":  "Items"
+                                                                                  },
+                                                                        "total_amount":  {
+                                                                                             "type":  "number",
+                                                                                             "title":  "Total Amount"
+                                                                                         },
+                                                                        "status":  {
+                                                                                       "type":  "string",
+                                                                                       "title":  "Status",
+                                                                                       "default":  "open"
+                                                                                   },
+                                                                        "created_at":  {
+                                                                                           "type":  "string",
+                                                                                           "format":  "date-time",
+                                                                                           "title":  "Created At"
+                                                                                       }
+                                                                    },
+                                                     "type":  "object",
+                                                     "required":  [
+                                                                      "id",
+                                                                      "items",
+                                                                      "total_amount"
+                                                                  ],
+                                                     "title":  "Order"
+                                                 },
+                                       "OrderItem":  {
+                                                         "properties":  {
+                                                                            "item_id":  {
+                                                                                            "type":  "string",
+                                                                                            "title":  "Item Id"
+                                                                                        },
+                                                                            "name":  {
+                                                                                         "type":  "string",
+                                                                                         "title":  "Name"
+                                                                                     },
+                                                                            "quantity":  {
+                                                                                             "type":  "integer",
+                                                                                             "title":  "Quantity"
+                                                                                         },
+                                                                            "price":  {
+                                                                                          "type":  "number",
+                                                                                          "title":  "Price"
+                                                                                      },
+                                                                            "special_requests":  {
+                                                                                                     "anyOf":  [
+                                                                                                                   {
+                                                                                                                       "type":  "string"
+                                                                                                                   },
+                                                                                                                   {
+                                                                                                                       "type":  "null"
+                                                                                                                   }
+                                                                                                               ],
+                                                                                                     "title":  "Special Requests"
+                                                                                                 }
+                                                                        },
+                                                         "type":  "object",
+                                                         "required":  [
+                                                                          "item_id",
+                                                                          "name",
+                                                                          "quantity",
+                                                                          "price"
+                                                                      ],
+                                                         "title":  "OrderItem"
+                                                     },
+                                       "ValidationError":  {
+                                                               "properties":  {
+                                                                                  "loc":  {
+                                                                                              "items":  {
+                                                                                                            "anyOf":  [
+                                                                                                                          {
+                                                                                                                              "type":  "string"
+                                                                                                                          },
+                                                                                                                          {
+                                                                                                                              "type":  "integer"
+                                                                                                                          }
+                                                                                                                      ]
+                                                                                                        },
+                                                                                              "type":  "array",
+                                                                                              "title":  "Location"
+                                                                                          },
+                                                                                  "msg":  {
+                                                                                              "type":  "string",
+                                                                                              "title":  "Message"
+                                                                                          },
+                                                                                  "type":  {
+                                                                                               "type":  "string",
+                                                                                               "title":  "Error Type"
+                                                                                           },
+                                                                                  "input":  {
+                                                                                                "title":  "Input"
+                                                                                            },
+                                                                                  "ctx":  {
+                                                                                              "type":  "object",
+                                                                                              "title":  "Context"
+                                                                                          }
+                                                                              },
+                                                               "type":  "object",
+                                                               "required":  [
+                                                                                "loc",
+                                                                                "msg",
+                                                                                "type"
+                                                                            ],
+                                                               "title":  "ValidationError"
+                                                           }
+                                   }
+                   }
+}

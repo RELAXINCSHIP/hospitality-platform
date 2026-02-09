@@ -1,0 +1,608 @@
+/* Google Fonts Import - MUST be first */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@import "tailwindcss";
+
+/* ========================================
+   HOSPITALITY - THE DELILAH STANDARD
+   Premium Dark Mode Design System
+   ======================================== */
+
+@theme {
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Core Colors */
+  --color-void: #020202;
+  /* Deep OLED Black */
+  --color-charcoal: #121214;
+  --color-slate: #27272a;
+  --color-ash: #3f3f46;
+
+  /* Accents */
+  --color-gold: #D4AF37;
+  /* Metallic Gold */
+  --color-gold-muted: #b8975a;
+  --color-champagne: #F7E7CE;
+  --color-emerald: #10b981;
+  --color-ruby: #ef4444;
+  --color-sapphire: #3b82f6;
+
+  /* Semantic */
+  --color-border: hsl(240 3.7% 15.9%);
+  --color-input: hsl(240 3.7% 15.9%);
+  --color-ring: var(--color-gold);
+  --color-background: var(--color-void);
+  --color-foreground: hsl(0 0% 98%);
+  --color-primary: var(--color-gold);
+  --color-primary-foreground: var(--color-void);
+  --color-secondary: var(--color-charcoal);
+  --color-secondary-foreground: hsl(0 0% 98%);
+  --color-destructive: var(--color-ruby);
+  --color-destructive-foreground: hsl(0 0% 98%);
+  --color-muted: var(--color-slate);
+  --color-muted-foreground: hsl(240 5% 64.9%);
+  --color-accent: var(--color-slate);
+  --color-accent-foreground: hsl(0 0% 98%);
+  --color-popover: var(--color-charcoal);
+  --color-popover-foreground: hsl(0 0% 98%);
+  --color-card: var(--color-charcoal);
+  --color-card-foreground: hsl(0 0% 98%);
+
+  /* Radius */
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+  --radius-sm: 0.25rem;
+}
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    letter-spacing: -0.015em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+}
+
+/* ========================================
+   GLASSMORPHISM SYSTEM
+   ======================================== */
+
+.glass-panel {
+  background-color: rgba(10, 10, 12, 0.7);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card {
+  background-color: rgba(18, 18, 20, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.5rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background-color: rgba(24, 24, 27, 0.6);
+  border-color: var(--color-gold);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
+}
+
+.glass-card-elevated {
+  background-color: rgba(10, 10, 12, 0.8);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 20px 50px -10px rgba(0, 0, 0, 0.7);
+}
+
+/* ========================================
+   METRIC CARDS
+   ======================================== */
+
+.metric-card {
+  background-color: rgba(24, 24, 27, 0.7);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+.metric-card .metric-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: white;
+}
+
+.metric-card .metric-label {
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+
+.metric-card .metric-trend {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.metric-card .metric-trend.positive {
+  color: var(--color-emerald);
+}
+
+.metric-card .metric-trend.negative {
+  color: var(--color-ruby);
+}
+
+/* ========================================
+   TABLE STATUS INDICATORS
+   ======================================== */
+
+.status-available {
+  background-color: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: var(--color-emerald);
+}
+
+.status-occupied {
+  background-color: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.4);
+  color: var(--color-sapphire);
+}
+
+.status-alert {
+  background-color: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: var(--color-ruby);
+  animation: pulse-alert 2s infinite;
+}
+
+.status-vip {
+  background-color: rgba(212, 168, 83, 0.2);
+  border-color: rgba(212, 168, 83, 0.4);
+  color: var(--color-gold);
+}
+
+/* ========================================
+   COURSE FIRING BUTTONS
+   ======================================== */
+
+.fire-button {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-width: 2px;
+  border-style: solid;
+  transition: all 0.2s;
+}
+
+.fire-button.pending {
+  background-color: transparent;
+  border-color: var(--color-ash);
+  color: var(--color-muted-foreground);
+}
+
+.fire-button.ready {
+  background-color: rgba(212, 168, 83, 0.1);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.fire-button.ready:hover {
+  background-color: rgba(212, 168, 83, 0.2);
+}
+
+.fire-button.fired {
+  background-color: rgba(16, 185, 129, 0.1);
+  border-color: var(--color-emerald);
+  color: var(--color-emerald);
+}
+
+.fire-button.completed {
+  background-color: var(--color-slate);
+  border-color: var(--color-slate);
+  color: var(--color-muted-foreground);
+  opacity: 0.5;
+}
+
+/* ========================================
+   MENU ITEM CARDS (Tablet)
+   ======================================== */
+
+.menu-item-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  background-color: var(--color-charcoal);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease-out;
+}
+
+.menu-item-card:hover {
+  border-color: rgba(212, 168, 83, 0.3);
+  background-color: rgba(24, 24, 27, 0.8);
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(212, 168, 83, 0.1);
+}
+
+.menu-item-card:active {
+  transform: scale(0.98);
+}
+
+.menu-item-card .item-price {
+  font-family: var(--font-mono);
+  color: var(--color-gold);
+  font-weight: 500;
+}
+
+.menu-item-card .item-station {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-muted-foreground);
+}
+
+/* ========================================
+   FLOOR PLAN
+   ======================================== */
+
+.floor-plan-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-charcoal) 0%, var(--color-void) 100%);
+  background-image:
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.floor-table {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  border-width: 2px;
+  border-style: solid;
+  font-weight: 700;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.floor-table:hover {
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+.floor-table.size-2 {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.floor-table.size-4 {
+  width: 5rem;
+  height: 3.5rem;
+  font-size: 0.875rem;
+}
+
+.floor-table.size-6 {
+  width: 7rem;
+  height: 4rem;
+  font-size: 1rem;
+}
+
+.floor-table.size-8 {
+  width: 9rem;
+  height: 4.5rem;
+  font-size: 1rem;
+}
+
+/* ========================================
+   SIDEBAR NAVIGATION
+   ======================================== */
+
+.nav-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5rem;
+  /* background-color: var(--color-void); Removed for glass effect */
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 0;
+  z-index: 50;
+}
+
+.nav-item {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: var(--color-muted-foreground);
+  transition: all 0.2s;
+}
+
+.nav-item:hover {
+  background-color: var(--color-charcoal);
+  color: white;
+}
+
+.nav-item.active {
+  background-color: rgba(212, 168, 83, 0.1);
+  color: var(--color-gold);
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-alert {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes glow-gold {
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(212, 168, 83, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 20px rgba(212, 168, 83, 0.5);
+  }
+}
+
+@keyframes aurora {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes breathe {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.85;
+    transform: scale(0.98);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-alert {
+  animation: pulse-alert 2s infinite;
+}
+
+.animate-glow {
+  animation: glow-gold 3s ease-in-out infinite;
+}
+
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.bg-aurora {
+  background: linear-gradient(-45deg, var(--color-void), #1a1a20, #0a0a0c, var(--color-void));
+  background-size: 400% 400%;
+  animation: aurora 15s ease infinite;
+}
+
+/* Stagger children animations */
+.stagger-children>* {
+  opacity: 0;
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+.stagger-children>*:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.stagger-children>*:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.stagger-children>*:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.stagger-children>*:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.stagger-children>*:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.stagger-children>*:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ash);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-slate);
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.text-gold {
+  color: var(--color-gold);
+}
+
+.text-emerald {
+  color: var(--color-emerald);
+}
+
+.text-ruby {
+  color: var(--color-ruby);
+}
+
+.text-sapphire {
+  color: var(--color-sapphire);
+}
+
+.bg-gold {
+  background-color: var(--color-gold);
+}
+
+.bg-emerald {
+  background-color: var(--color-emerald);
+}
+
+.bg-ruby {
+  background-color: var(--color-ruby);
+}
+
+.bg-sapphire {
+  background-color: var(--color-sapphire);
+}
+
+.border-gold {
+  border-color: var(--color-gold);
+}
+
+.border-emerald {
+  border-color: var(--color-emerald);
+}
+
+.border-ruby {
+  border-color: var(--color-ruby);
+}
+
+.border-sapphire {
+  border-color: var(--color-sapphire);
+}
+
+.bg-void {
+  background-color: var(--color-void);
+}
+
+.bg-charcoal {
+  background-color: var(--color-charcoal);
+}
+
+.bg-slate {
+  background-color: var(--color-slate);
+}
+
+.bg-ash {
+  background-color: var(--color-ash);
+}

@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "hospitality-backend"
+version = "0.1.0"
+description = "Backend for HOSPITALITY AI Operating System"
+authors = ["Antigravity <antigravity@google.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.109.0"
+uvicorn = "^0.27.0"
+google-cloud-aiplatform = "^1.38.0"
+google-cloud-pubsub = "^2.19.0"
+sqlalchemy = "^2.0.25"
+alembic = "^1.13.1"
+pydantic = "^2.6.0"
+pydantic-settings = "^2.1.0"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+httpx = "^0.26.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
