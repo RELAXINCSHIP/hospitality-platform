@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRestaurant } from "@/context/RestaurantContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sidebar } from "@/components/dashboard/Sidebar";
@@ -303,7 +303,9 @@ export default function DashboardPage() {
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="pt-4">
-                            <FloorPlanView />
+                            <Suspense fallback={<div className="h-[400px] flex items-center justify-center text-muted-foreground">Loading floor...</div>}>
+                                <FloorPlanView />
+                            </Suspense>
                         </CardContent>
                     </Card>
 
